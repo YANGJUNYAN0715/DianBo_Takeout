@@ -1,6 +1,7 @@
 package com.yjy.dianbo.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.yjy.dianbo.common.BaseContext;
 import com.yjy.dianbo.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -34,6 +35,9 @@ public class LoginCheckFilter implements Filter {
             return;
         }
         if(request.getSession().getAttribute("employee")!=null) {
+            Long empId = (Long)request.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);
+
             filterChain.doFilter(request, response);
             return;
         };
